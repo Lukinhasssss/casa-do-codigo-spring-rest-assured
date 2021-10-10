@@ -9,10 +9,12 @@ import javax.validation.constraints.Size
 data class NewAuthorRequest(
 
     @field:NotBlank(message = "Campo obrigatório")
+    @field:Size(max = 50)
     val name: String,
 
     @field:NotBlank(message = "Campo obrigatório")
     @field:Pattern(regexp = "[a-zA-Z0-9+._%-+]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+", message = "Email inválido")
+    @field:Size(max = 50)
     val email: String,
 
     @field:NotBlank(message = "Campo obrigatório")
