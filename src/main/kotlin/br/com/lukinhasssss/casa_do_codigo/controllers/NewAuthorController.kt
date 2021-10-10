@@ -18,8 +18,7 @@ class NewAuthorController(
 
     @PostMapping
     fun registerAuthor(@RequestBody @Valid request: NewAuthorRequest): ResponseEntity<Unit> {
-        val author = request.toModel()
-        authorRepository.save(author)
+        val author = request.toModel().let { authorRepository.save(it) }
 
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(author.id).toUri()
 
