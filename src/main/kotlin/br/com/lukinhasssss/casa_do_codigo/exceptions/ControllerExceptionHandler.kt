@@ -23,4 +23,14 @@ class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(validationError)
     }
 
+    @ExceptionHandler(value = [AlreadyExistsException::class])
+    fun handleResponseStatusException(exception: AlreadyExistsException, request: HttpServletRequest): ResponseEntity<ValidationError> {
+        val errorMessage = ErrorMessage(fieldName = exception.localizedMessage, message = exception.cause!!.localizedMessage)
+        val validationError = ValidationError(status = HttpStatus.BAD_REQUEST.value(), path = request.requestURI, messages = listOf(errorMessage))
+
+        logger.error("Erro ao fazer requisição para o path: ${request.requestURI}, Body: $validationError")
+
+        return ResponseEntity.badRequest().body(validationError)
+    }
+
 }

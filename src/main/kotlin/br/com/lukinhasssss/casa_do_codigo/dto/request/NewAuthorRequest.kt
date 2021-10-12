@@ -1,7 +1,10 @@
 package br.com.lukinhasssss.casa_do_codigo.dto.request
 
+import br.com.lukinhasssss.casa_do_codigo.exceptions.AlreadyExistsException
 import br.com.lukinhasssss.casa_do_codigo.model.Author
-import javax.validation.constraints.Email
+import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
+import org.springframework.http.HttpStatus
+import org.springframework.web.server.ResponseStatusException
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
@@ -23,7 +26,12 @@ data class NewAuthorRequest(
 
 ) {
 
-    fun toModel(): Author {
+    fun toModel(authorRepository: AuthorRepository): Author {
+        authorRepository.findByEmail(email).let {
+            if (it.isPresent)
+                throw AlreadyExistsException(fieldName = "email", message = Exception("There is already an author with this email"))
+        }
+
         return Author(
             name = name,
             email = email,

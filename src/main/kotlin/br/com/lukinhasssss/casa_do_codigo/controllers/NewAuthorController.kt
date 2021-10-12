@@ -23,7 +23,7 @@ class NewAuthorController(
     fun registerAuthor(@RequestBody @Valid request: NewAuthorRequest): ResponseEntity<Unit> {
         logger.info("Iniciando POST na rota: /authors - Body: $request")
 
-        val author = request.toModel().let { authorRepository.save(it) }
+        val author = request.toModel(authorRepository).let { authorRepository.save(it) }
 
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(author.id).toUri()
 
