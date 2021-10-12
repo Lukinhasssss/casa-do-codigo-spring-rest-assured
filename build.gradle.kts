@@ -30,7 +30,11 @@ dependencies {
 	runtimeOnly("org.postgresql:postgresql:42.2.24.jre7")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.5")
+	testImplementation("com.h2database:h2:1.4.200")
 	testImplementation("io.mockk:mockk:1.12.0")
+	testImplementation("io.rest-assured:rest-assured:4.4.0")
+	testImplementation("io.rest-assured:kotlin-extensions:4.4.0")
+	testImplementation("com.squareup.okhttp3:mockwebserver:3.2.0")
 }
 
 tasks.withType<KotlinCompile> {
