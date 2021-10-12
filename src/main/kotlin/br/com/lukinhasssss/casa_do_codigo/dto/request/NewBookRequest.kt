@@ -12,36 +12,36 @@ import javax.validation.constraints.*
 
 data class NewBookRequest(
 
-    @Size(max = 100)
-    @NotBlank(message = "Required field")
+    @field:Size(max = 100)
+    @field:NotBlank(message = "Required field")
     val title: String,
 
-    @Size(max = 500)
-    @NotBlank(message = "Required field")
+    @field:Size(max = 500)
+    @field:NotBlank(message = "Required field")
     val resume: String,
 
-    @NotBlank(message = "Required field")
+    @field:NotBlank(message = "Required field")
     val summary: String,
 
-    @Min(value = 20)
-    @NotNull(message = "Required field")
+    @field:Min(value = 20)
+    @field:NotNull(message = "Required field")
     val price: BigDecimal,
 
-    @Min(value = 100)
-    @NotNull(message = "Required field")
+    @field:Min(value = 100)
+    @field:NotNull(message = "Required field")
     val pageQuantity: Int,
 
-    @NotBlank(message = "Required field")
+    @field:NotBlank(message = "Required field")
     val isbn: String,
     
-    @Future
-    @NotNull(message = "Required field")
+    @field:Future
+    @field:NotNull(message = "Required field")
     val publicationDate: LocalDate,
     
-    @NotBlank(message = "Required field")
+    @field:NotBlank(message = "Required field")
     val authorName: String,
     
-    @NotBlank(message = "Required field")
+    @field:NotBlank(message = "Required field")
     val category: String
 
 ) {
