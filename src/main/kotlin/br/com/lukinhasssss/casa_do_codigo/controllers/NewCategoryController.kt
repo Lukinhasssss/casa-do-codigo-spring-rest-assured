@@ -21,13 +21,13 @@ class NewCategoryController(
 
     @PostMapping
     fun registerAuthor(@RequestBody @Valid request: NewCategoryRequest): ResponseEntity<Unit> {
-        logger.info("Iniciando POST na rota: /categories - Body: $request")
+        logger.info("Starting POST on route: /categories - Body: $request")
 
         val category = request.toModel(categoryRepository).let { categoryRepository.save(it) }
 
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(category.id).toUri()
 
-        logger.info("Finalizando POST na rota: /categories")
+        logger.info("Finishing POST on route: /categories")
         return ResponseEntity.created(uri).build()
     }
 

@@ -21,13 +21,13 @@ class NewAuthorController(
 
     @PostMapping
     fun registerAuthor(@RequestBody @Valid request: NewAuthorRequest): ResponseEntity<Unit> {
-        logger.info("Iniciando POST na rota: /authors - Body: $request")
+        logger.info("Starting POST on route: /authors - Body: $request")
 
         val author = request.toModel(authorRepository).let { authorRepository.save(it) }
 
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(author.id).toUri()
 
-        logger.info("Finalizando POST na rota: /authors")
+        logger.info("Finishing POST on route: /authors")
         return ResponseEntity.created(uri).build()
     }
 

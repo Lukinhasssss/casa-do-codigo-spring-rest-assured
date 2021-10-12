@@ -18,7 +18,7 @@ class ControllerExceptionHandler {
         val errorMessages = exception.bindingResult.fieldErrors.map { ErrorMessage(it.field, it.defaultMessage.toString()) }
         val validationError = ValidationError(status = HttpStatus.BAD_REQUEST.value(), path = request.requestURI, messages = errorMessages)
 
-        logger.error("Erro ao fazer requisição para o path: ${request.requestURI}, Body: $validationError")
+        logger.error("Error to make request on route: ${request.requestURI}, Body: $validationError")
 
         return ResponseEntity.badRequest().body(validationError)
     }
@@ -28,7 +28,7 @@ class ControllerExceptionHandler {
         val errorMessage = ErrorMessage(fieldName = exception.localizedMessage, message = exception.cause!!.localizedMessage)
         val validationError = ValidationError(status = HttpStatus.BAD_REQUEST.value(), path = request.requestURI, messages = listOf(errorMessage))
 
-        logger.error("Erro ao fazer requisição para o path: ${request.requestURI}, Body: $validationError")
+        logger.error("Error to make request on route: ${request.requestURI}, Body: $validationError")
 
         return ResponseEntity.badRequest().body(validationError)
     }
