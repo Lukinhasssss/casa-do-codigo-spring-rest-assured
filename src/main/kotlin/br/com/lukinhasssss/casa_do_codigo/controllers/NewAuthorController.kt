@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/authors")
+@RequestMapping("/api/v1/authors")
 class NewAuthorController(
     private val authorRepository: AuthorRepository
 ) {

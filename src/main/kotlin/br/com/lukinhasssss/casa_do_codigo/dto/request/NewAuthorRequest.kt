@@ -8,17 +8,17 @@ import javax.validation.constraints.Size
 
 data class NewAuthorRequest(
 
-    @field:NotBlank(message = "Campo obrigatório")
-    @field:Size(max = 50)
+    @field:NotBlank(message = "Required field")
+    @field:Size(max = 50, message = "Name cannot be longer than 50 characters")
     val name: String,
 
-    @field:NotBlank(message = "Campo obrigatório")
-    @field:Pattern(regexp = "[a-zA-Z0-9+._%-+]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+", message = "Email inválido")
-    @field:Size(max = 50)
+    @field:NotBlank(message = "Required field")
+    @field:Pattern(regexp = "[a-zA-Z0-9+._%-+]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+", message = "Invalid email")
+    @field:Size(max = 50, message = "Email cannot be longer than 50 characters")
     val email: String,
 
-    @field:NotBlank(message = "Campo obrigatório")
-    @field:Size(max = 400)
+    @field:NotBlank(message = "Required field")
+    @field:Size(max = 400, message = "Description cannot be longer than 400 characters")
     val description: String
 
 ) {
