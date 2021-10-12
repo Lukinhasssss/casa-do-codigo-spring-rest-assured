@@ -33,4 +33,14 @@ class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(validationError)
     }
 
+    @ExceptionHandler(value = [NotFoundException::class])
+    fun handleNotFoundException(exception: NotFoundException, request: HttpServletRequest): ResponseEntity<ValidationError> {
+        val errorMessage = ErrorMessage(fieldName = exception.localizedMessage, message = exception.cause!!.localizedMessage)
+        val validationError = ValidationError(status = HttpStatus.NOT_FOUND.value(), path = request.requestURI, messages = listOf(errorMessage))
+
+        logger.error("Error to make request on route: ${request.requestURI}, Body: $validationError")
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(validationError)
+    }
+
 }

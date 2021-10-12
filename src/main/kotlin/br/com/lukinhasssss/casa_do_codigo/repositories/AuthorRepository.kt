@@ -6,6 +6,8 @@ import java.util.*
 
 interface AuthorRepository : JpaRepository<Author, String> {
 
+    fun findByName(name: String): Optional<Author>
+
     fun findByEmail(email: String): Optional<Author>
 
 }
