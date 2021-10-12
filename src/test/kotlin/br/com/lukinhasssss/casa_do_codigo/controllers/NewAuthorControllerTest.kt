@@ -1,22 +1,35 @@
 package br.com.lukinhasssss.casa_do_codigo.controllers
 
 import br.com.lukinhasssss.casa_do_codigo.dto.request.NewAuthorRequest
+import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers.*
 import org.hamcrest.core.IsEqual
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class NewAuthorControllerTest {
 
+    @Autowired
+    lateinit var authorRepository:AuthorRepository
+
     @LocalServerPort
     private var port: Int = 0
+
+    @BeforeEach
+    internal fun setUp() {
+        authorRepository.deleteAll()
+    }
 
     @Test
     internal fun `should return 201 with the correct header location when request is valid`() {
@@ -197,6 +210,30 @@ class NewAuthorControllerTest {
             body("messages.findAll { it.fieldName == 'description' }.size()", IsEqual(1))
             body("messages.find { it.fieldName == 'description' }", hasValue("Required field"))
             body("messages.findAll { it.fieldName == 'email' }.size()", IsEqual(2))
+        }
+    }
+
+    @Test
+    internal fun `should return 400 with an error message when email already exists`() {
+        // Arrange
+        val request = NewAuthorRequest(name = "Monkey D. Luffy", email = "luffy@gmail.com", description = "Meat")
+
+        // Act - Assert
+        Given {
+            port(port)
+            contentType("application/json")
+            body(request)
+        } When {
+            post("/api/v1/authors")
+            post("/api/v1/authors")
+        } Then  {
+            statusCode(400)
+            body("timestamp", notNullValue())
+            body("status", IsEqual(400))
+            body("path", IsEqual("/api/v1/authors"))
+            body("messages.size()", IsEqual(1))
+            body("messages.get(0).fieldName", IsEqual("email"))
+            body("messages.get(0).message", IsEqual("There is already an author with this email"))
         }
     }
 }
