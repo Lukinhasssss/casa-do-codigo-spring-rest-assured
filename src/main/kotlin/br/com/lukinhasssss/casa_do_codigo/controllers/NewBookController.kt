@@ -26,7 +26,7 @@ class NewBookController(
     @PostMapping
     fun registerBook(@RequestBody @Valid request: NewBookRequest): ResponseEntity<Unit> {
         logger.info("Starting POST on route: /books - Body: $request")
-        val book = request.toModel(authorRepository, categoryRepository, bookRepository).let { bookRepository.save(it) }
+        val book = request.toModel(authorRepository, categoryRepository).let { bookRepository.save(it) }
 
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(book.id).toUri()
 
