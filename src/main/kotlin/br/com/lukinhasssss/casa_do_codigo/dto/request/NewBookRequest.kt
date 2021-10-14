@@ -16,7 +16,7 @@ data class NewBookRequest(
 
     @field:Size(max = 100)
     @field:NotBlank(message = "Required field")
-    @CheckIfExists(domainClass = "Book", fieldName = "title")
+    @CheckIfExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this title")
     val title: String,
 
     @field:Size(max = 500)
@@ -33,7 +33,7 @@ data class NewBookRequest(
     val pageQuantity: Int,
 
     @field:NotBlank(message = "Required field")
-    @CheckIfExists(domainClass = "Book", fieldName = "isbn")
+    @CheckIfExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this isbn")
     val isbn: String,
     
     @field:Future
