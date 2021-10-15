@@ -1,6 +1,6 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.book
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewBookRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.book.NewBookRequest
 import br.com.lukinhasssss.casa_do_codigo.model.Author
 import br.com.lukinhasssss.casa_do_codigo.model.Category
 import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
@@ -10,7 +10,6 @@ import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers.*
-import org.hamcrest.core.IsEqual
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

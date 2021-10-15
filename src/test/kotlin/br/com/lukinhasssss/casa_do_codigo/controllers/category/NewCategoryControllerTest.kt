@@ -1,6 +1,6 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.category
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewCategoryRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.category.NewCategoryRequest
 import br.com.lukinhasssss.casa_do_codigo.repositories.CategoryRepository
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then

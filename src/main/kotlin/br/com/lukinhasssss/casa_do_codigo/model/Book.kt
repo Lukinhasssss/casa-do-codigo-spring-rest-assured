@@ -1,6 +1,6 @@
 package br.com.lukinhasssss.casa_do_codigo.model
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewBookRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.book.NewBookRequest
 import org.hibernate.annotations.GenericGenerator
 import java.math.BigDecimal
 import java.time.LocalDate

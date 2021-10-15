@@ -1,6 +1,6 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.book
 
-import br.com.lukinhasssss.casa_do_codigo.dto.response.BookResponse
+import br.com.lukinhasssss.casa_do_codigo.dto.response.book.BookResponse
 import br.com.lukinhasssss.casa_do_codigo.repositories.BookRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -18,10 +18,10 @@ class ListAllBooksController(
 
     @GetMapping
     fun listAllBooks(): ResponseEntity<List<BookResponse>> {
-        logger.info("Starting the book listing...")
+        logger.info("Start listing of all books on path: /api/v1/books")
         val books = bookRepository.findAll().map { BookResponse(it) }
 
-        logger.info("Finishing the book listing - body: {}", books)
+        logger.info("End listing of all books on path: /api/v1/books - body: {}", books)
         return ResponseEntity.ok(books)
     }
 

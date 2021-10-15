@@ -1,6 +1,6 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.book
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewBookRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.book.NewBookRequest
 import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
 import br.com.lukinhasssss.casa_do_codigo.repositories.BookRepository
 import br.com.lukinhasssss.casa_do_codigo.repositories.CategoryRepository

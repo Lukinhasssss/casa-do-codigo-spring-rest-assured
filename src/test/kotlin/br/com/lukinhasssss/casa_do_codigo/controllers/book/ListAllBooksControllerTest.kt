@@ -1,8 +1,8 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.book
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewAuthorRequest
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewBookRequest
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewCategoryRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.author.NewAuthorRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.book.NewBookRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.category.NewCategoryRequest
 import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
 import br.com.lukinhasssss.casa_do_codigo.repositories.BookRepository
 import br.com.lukinhasssss.casa_do_codigo.repositories.CategoryRepository
@@ -18,7 +18,6 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
 import java.math.BigDecimal
 import java.time.LocalDate
-import java.util.*
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")

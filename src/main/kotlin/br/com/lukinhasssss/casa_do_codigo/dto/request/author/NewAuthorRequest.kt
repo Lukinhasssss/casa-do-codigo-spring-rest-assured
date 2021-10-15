@@ -1,10 +1,8 @@
-package br.com.lukinhasssss.casa_do_codigo.dto.request
+package br.com.lukinhasssss.casa_do_codigo.dto.request.author
 
 import br.com.lukinhasssss.casa_do_codigo.exceptions.AlreadyExistsException
 import br.com.lukinhasssss.casa_do_codigo.model.Author
 import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
-import org.springframework.http.HttpStatus
-import org.springframework.web.server.ResponseStatusException
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size

@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.casa_do_codigo.dto.response
+package br.com.lukinhasssss.casa_do_codigo.dto.response.book
 
 import br.com.lukinhasssss.casa_do_codigo.model.Book
 

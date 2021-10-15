@@ -1,6 +1,6 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.author
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewAuthorRequest
+import br.com.lukinhasssss.casa_do_codigo.dto.request.author.NewAuthorRequest
 import br.com.lukinhasssss.casa_do_codigo.repositories.AuthorRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity

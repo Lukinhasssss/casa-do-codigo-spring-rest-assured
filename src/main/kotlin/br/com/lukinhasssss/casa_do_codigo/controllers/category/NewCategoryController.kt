@@ -1,6 +1,7 @@
-package br.com.lukinhasssss.casa_do_codigo.controllers
+package br.com.lukinhasssss.casa_do_codigo.controllers.category
 
-import br.com.lukinhasssss.casa_do_codigo.dto.request.NewCategoryRequest
+import br.com.lukinhasssss.casa_do_codigo.controllers.author.NewAuthorController
+import br.com.lukinhasssss.casa_do_codigo.dto.request.category.NewCategoryRequest
 import br.com.lukinhasssss.casa_do_codigo.repositories.CategoryRepository
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity

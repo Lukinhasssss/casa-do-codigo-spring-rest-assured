@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.casa_do_codigo.dto.request
+package br.com.lukinhasssss.casa_do_codigo.dto.request.book
 
 import br.com.lukinhasssss.casa_do_codigo.config.validations.CheckIfExists
 import br.com.lukinhasssss.casa_do_codigo.exceptions.NotFoundException

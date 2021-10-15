@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.casa_do_codigo.dto.request
+package br.com.lukinhasssss.casa_do_codigo.dto.request.category
 
 import br.com.lukinhasssss.casa_do_codigo.exceptions.AlreadyExistsException
 import br.com.lukinhasssss.casa_do_codigo.model.Category
