@@ -9,7 +9,7 @@ import br.com.lukinhasssss.casa_do_codigo.repositories.CategoryRepository
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
-import org.hamcrest.Matchers.notNullValue
+import org.hamcrest.Matchers.*
 import org.hamcrest.core.IsEqual
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
@@ -19,10 +19,11 @@ import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.util.*
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-class ListAllBooksControllerTest {
+class BookDetailsControllerTest {
 
     @LocalServerPort
     private var port = 0
@@ -44,25 +45,38 @@ class ListAllBooksControllerTest {
     }
 
     @Test
-    internal fun `should return 200 with a list of all books`() {
+    internal fun `should return 200 with book details`() {
         // Arrange
         authorRepository.save(authorRequest.toModel(authorRepository))
         categoryRepository.save(categoryRequest.toModel(categoryRepository))
-        bookRepository.save(bookRequest.toModel(authorRepository, categoryRepository))
-        bookRepository.save(bookRequest.toModel(authorRepository, categoryRepository).copy(title = "Book 2", isbn = "987-654-321"))
+        val book = bookRepository.save(bookRequest.toModel(authorRepository, categoryRepository))
 
         // Act - Assert
         Given {
             port(port)
         } When {
-            get("/api/v1/books")
+            get("/api/v1/books/${book.id}")
         } Then {
             statusCode(200)
-            body("size()", IsEqual(2))
-            body("get(0).id", notNullValue())
-            body("get(0).name", notNullValue())
-            body("get(1).id", notNullValue())
-            body("get(1).name", notNullValue())
+            body("", notNullValue())
+        }
+    }
+
+    @Test
+    internal fun `should return 404 with an erro message when book do not exists`() {
+        // Arrange
+        authorRepository.save(authorRequest.toModel(authorRepository))
+        categoryRepository.save(categoryRequest.toModel(categoryRepository))
+        bookRepository.save(bookRequest.toModel(authorRepository, categoryRepository))
+
+        // Act - Assert
+        Given {
+            port(port)
+        } When {
+            get("/api/v1/books/${UUID.randomUUID()}")
+        } Then {
+            statusCode(404)
+            body("", notNullValue())
         }
     }
 
