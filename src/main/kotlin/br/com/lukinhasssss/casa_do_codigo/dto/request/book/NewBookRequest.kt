@@ -1,5 +1,6 @@
 package br.com.lukinhasssss.casa_do_codigo.dto.request.book
 
+import br.com.lukinhasssss.casa_do_codigo.config.validations.CheckIfAlreadyExists
 import br.com.lukinhasssss.casa_do_codigo.config.validations.CheckIfExists
 import br.com.lukinhasssss.casa_do_codigo.exceptions.NotFoundException
 import br.com.lukinhasssss.casa_do_codigo.model.Book
@@ -16,7 +17,7 @@ data class NewBookRequest(
 
     @field:Size(max = 100)
     @field:NotBlank(message = "Required field")
-    @CheckIfExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this title")
+    @field:CheckIfAlreadyExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this title")
     val title: String,
 
     @field:Size(max = 500)
@@ -33,26 +34,26 @@ data class NewBookRequest(
     val pageQuantity: Int,
 
     @field:NotBlank(message = "Required field")
-    @CheckIfExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this isbn")
+    @field:CheckIfAlreadyExists(domainClass = "Book", fieldName = "title", message = "There is already a book with this isbn")
     val isbn: String,
     
     @field:Future
     val publicationDate: LocalDate,
     
     @field:NotBlank(message = "Required field")
+    @field:CheckIfExists(domainClass = "Author", fieldName = "name")
     val authorName: String,
     
     @field:NotBlank(message = "Required field")
+    @field:CheckIfExists(domainClass = "Category", fieldName = "name")
     val category: String
 
 ) {
 
     fun toModel(authorRepository: AuthorRepository, categoryRepository: CategoryRepository): Book {
-        val author = authorRepository.findByName(authorName)
-            .orElseThrow { NotFoundException(fieldName = "authorName", message = Exception("Author not found")) }
+        val author = authorRepository.findByName(authorName).get()
 
-        val category = categoryRepository.findByName(category)
-            .orElseThrow { NotFoundException(fieldName = "authorName", message = Exception("Category not found")) }
+        val category = categoryRepository.findByName(category).get()
 
         return Book(this, author, category)
     }

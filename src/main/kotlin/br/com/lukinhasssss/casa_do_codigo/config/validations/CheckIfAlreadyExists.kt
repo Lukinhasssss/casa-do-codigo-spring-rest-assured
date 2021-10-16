@@ -12,34 +12,34 @@ import kotlin.reflect.KClass
 @MustBeDocumented
 @Target(FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = [CheckIfExistsValidator::class])
-annotation class CheckIfExists(
+@Constraint(validatedBy = [CheckIfAlreadyExistsValidator::class])
+annotation class CheckIfAlreadyExists(
 
     val domainClass: String,
     val fieldName: String,
-    val message: String = "{domainClass} not found",
+    val message: String = "There is already a {domainClass} with this {fieldName}",
     val groups: Array<KClass<Any>> = [],
     val payload: Array<KClass<Payload>> = []
 
 )
 
-class CheckIfExistsValidator(
+class CheckIfAlreadyExistsValidator(
     private val em: EntityManager
-) : ConstraintValidator<CheckIfExists, Any> {
+) : ConstraintValidator<CheckIfAlreadyExists, Any> {
 
     private lateinit var domainClass: String
     private lateinit var fieldName: String
 
-    override fun initialize(constraintAnnotation: CheckIfExists) {
+    override fun initialize(constraintAnnotation: CheckIfAlreadyExists) {
         domainClass = constraintAnnotation.domainClass
         fieldName = constraintAnnotation.fieldName
     }
 
     override fun isValid(value: Any?, context: ConstraintValidatorContext?): Boolean {
 
-        return !em.createQuery("select 1 from $domainClass where $fieldName = :value")
+        return em.createQuery("select 1 from $domainClass where $fieldName = :value")
             .setParameter("value", value)
-            .resultList.isNullOrEmpty()
+            .resultList.isEmpty()
     }
 
 }

@@ -288,7 +288,7 @@ class NewBookControllerTest {
         } When {
             post("/api/v1/books")
         } Then {
-            statusCode(404)
+            statusCode(400)
         }
     }
 
@@ -322,7 +322,7 @@ class NewBookControllerTest {
         } When {
             post("/api/v1/books")
         } Then {
-            statusCode(404)
+            statusCode(400)
         }
     }
 
