@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 data class ErrorMessage(
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    val fieldName: String,
+    val fieldName: String?,
     val message: String
 
 )

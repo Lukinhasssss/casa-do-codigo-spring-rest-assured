@@ -25,8 +25,8 @@ class ControllerExceptionHandler {
 
     @ExceptionHandler(value = [AlreadyExistsException::class])
     fun handleResponseStatusException(exception: AlreadyExistsException, request: HttpServletRequest): ResponseEntity<ValidationError> {
-        val errorMessage = ErrorMessage(fieldName = exception.localizedMessage, message = exception.cause!!.localizedMessage)
-        val validationError = ValidationError(status = HttpStatus.BAD_REQUEST.value(), path = request.requestURI, messages = listOf(errorMessage))
+        val errorMessage = ErrorMessage(fieldName = exception.fieldName, message = exception.message)
+        val validationError = ValidationError(status = exception.httpStatus.value(), path = request.requestURI, messages = listOf(errorMessage))
 
         logger.error("Error to make request on route: ${request.requestURI}, Body: $validationError")
 
@@ -35,8 +35,8 @@ class ControllerExceptionHandler {
 
     @ExceptionHandler(value = [NotFoundException::class])
     fun handleNotFoundException(exception: NotFoundException, request: HttpServletRequest): ResponseEntity<ValidationError> {
-        val errorMessage = ErrorMessage(fieldName = exception.localizedMessage, message = exception.cause!!.localizedMessage)
-        val validationError = ValidationError(status = HttpStatus.NOT_FOUND.value(), path = request.requestURI, messages = listOf(errorMessage))
+        val errorMessage = ErrorMessage(fieldName = exception.fieldName, message = exception.message)
+        val validationError = ValidationError(status = exception.httpStatus.value(), path = request.requestURI, messages = listOf(errorMessage))
 
         logger.error("Error to make request on route: ${request.requestURI}, Body: $validationError")
 
